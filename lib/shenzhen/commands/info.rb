@@ -32,7 +32,7 @@ command :info do |c|
       tempfile = Tempfile.new(::File.basename(entry.name))
       begin
         zipfile.extract(entry, tempfile.path){ override = true }
-        plist = Plist::parse_xml(`security cms -D -i #{tempfile.path}`)
+        plist = Plist::parse_xml(`security cms -D -i "#{tempfile.path}"`)
 
         table = Terminal::Table.new do |t|
           plist.each do |key, value|
